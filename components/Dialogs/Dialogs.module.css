@@ -3,15 +3,21 @@
     grid-template-columns: 1fr 6fr;
 }
 .dialogsItems {
-    padding: 5px;
+    padding: 2px;
 }
 .messages {
-    padding: 5px;
+    padding: 2px;
     color: black;
 }
 
 .dialogsItem {
     text-decoration: none;
     color: darkblue;
+}
+.dialog img {
+    width: 30px;
+}
+.dialogs {
+    padding: 20px;
 }
 

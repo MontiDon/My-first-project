@@ -12,3 +12,17 @@
 .item a.active {
     color: gold;
 }
+
+.friends {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.friends {
+    padding-left: 20px ;
+}
+.friends img {
+    width: 30px;
+}
+
+

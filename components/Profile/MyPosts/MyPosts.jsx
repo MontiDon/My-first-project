@@ -1,12 +1,11 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {postData} from "../../../index";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
 
-    let postsElements = postData.map(p =>
-    <Post message={p.message} />);
+    let postsElements = props.posts.map(p =>
+        <Post message={p.message}/>);
 
     return (
         <div className={s.MyPostsArea}>

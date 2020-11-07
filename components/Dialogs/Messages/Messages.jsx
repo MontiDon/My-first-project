@@ -3,6 +3,8 @@ import React from "react";
 
 export const Messages = (props) => {
     return (
-        <div className={s.message}>{props.message}</div>
+        <h3>
+            <div className={s.message}>{props.message}</div>
+        </h3>
     )
 }
