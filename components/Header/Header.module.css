@@ -7,7 +7,12 @@
 .header {
     display: grid;
     grid-template-columns: 1fr 5fr;
+    /*background-color: blue;*/
 }
-.headerHead {
+/*.headerHead {
+    color: #b31159;
+}*/
+.headerName {
+    text-decoration: none;
     color: #b31159;
 }

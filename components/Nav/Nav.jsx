@@ -32,11 +32,11 @@ const Nav = () => {
                 <div className={s.friends}>
                     <div>
                         <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSeKZbcVtvtJKKvj5jnN11zgX82gll4TsnmFg&usqp=CAU" alt="My Awesome Image"/></div>
-                        <div><NavLink to=''>Ilya</NavLink></div>
+                        <div><NavLink to='/nastya'>Nastya</NavLink></div>
                     </div>
                     <div>
                         <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSeKZbcVtvtJKKvj5jnN11zgX82gll4TsnmFg&usqp=CAU" alt="My Awesome Image"/></div>
-                        <NavLink to='' >Artem</NavLink>
+                        <NavLink to='/katya' >Katya</NavLink>
                     </div>
                 </div>
             </div>

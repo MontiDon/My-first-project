@@ -1,5 +1,4 @@
 import React from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
@@ -10,6 +9,8 @@ import Weather from "./components/Weather/Weather";
 import Settings from "./components/Settings/Settings";
 import Translate from "./components/Translate/Translate";
 import Friends from "./components/Sitebar/Friends/Friends";
+import {BrowserRouter, Route} from "react-router-dom";
+import Awcp from "./components/App-wrapper-content-page/App-wrapper-content-page";
 
 
 const App = (props) => {
@@ -20,12 +21,14 @@ const App = (props) => {
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'  render={ () => <Dialogs dialogsPage={props.state.dialogsPage} />}/>
-                    <Route path='/profile'  render={ () => <Profile profilePage={props.state.profilePage}/>}/>
+                    <Route path='/profile'  render={ () => <Profile profilePage={props.state.profilePage}
+                                                                    addPost={props.addPost} />}/>
                     <Route path='/friends'  render={ () => <Friends sidebar={props.state.sidebar}/>}/>
                     <Route path='/news'  render={ () => <News />}/>
                     <Route path='/weather'  render={ () => <Weather />}/>
                     <Route path='/settings'  render={ () => <Settings />}/>
                     <Route path='/translate'  render={ () => <Translate />}/>
+                    <Route path='/home'  render={ () => <Awcp />}/>
                 </div>
             </div>
         </BrowserRouter>
