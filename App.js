@@ -14,15 +14,19 @@ import Awcp from "./components/App-wrapper-content-page/App-wrapper-content-page
 
 
 const App = (props) => {
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs'  render={ () => <Dialogs dialogsPage={props.state.dialogsPage} />}/>
+                    <Route path='/dialogs'  render={ () => <Dialogs dialogsPage={props.state.dialogsPage}
+                                                                    addMessage={props.addMessage}
+                                                                    updateMessageElement={props.updateMessageElement}/>}/>
                     <Route path='/profile'  render={ () => <Profile profilePage={props.state.profilePage}
-                                                                    addPost={props.addPost} />}/>
+                                                                    addPost={props.addPost}
+                                                                    updateNewPostText={props.updateNewPostText} />}/>
                     <Route path='/friends'  render={ () => <Friends sidebar={props.state.sidebar}/>}/>
                     <Route path='/news'  render={ () => <News />}/>
                     <Route path='/weather'  render={ () => <Weather />}/>
