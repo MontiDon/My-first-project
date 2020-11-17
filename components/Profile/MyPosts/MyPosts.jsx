@@ -2,16 +2,13 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
-const MyPosts = (props) => {
+const MyPosts = ({addPost, newPostText, posts, updateNewPostText}) => {
 
-    let postsElements = props.posts.map(p =>
+    let postsElements = posts.map(p =>
         <Post message={p.message}/>);
 
-
     let onPostChange = (e) => {
-        props.updateNewPostText(e.target.value);
-        console.log(e.target.value)
-
+        updateNewPostText(e.target.value);
     }
 
     return (
@@ -20,10 +17,10 @@ const MyPosts = (props) => {
                 <h3>My posts</h3>
             </div>
             <div>
-                <textarea onChange={onPostChange} value={props.newPostText}></textarea>
+                <textarea onChange={onPostChange} value={newPostText}></textarea>
             </div>
             <div>
-                <button onClick={props.addPost} >Add post</button>
+                <button onClick={addPost} >Add post</button>
             </div>
             <div className={s.Posts}>
                 {postsElements}
