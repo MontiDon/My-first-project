@@ -1,6 +1,5 @@
 import React from 'react';
 import * as serviceWorker from './serviceWorker';
-import state, {subscribe} from "./redux/State";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -10,10 +9,7 @@ let rerenderEntireTree = (state) => {
     ReactDOM.render(
         <React.StrictMode>
             <App state={state}
-                 addPost={store.addPost.bind(store)}
-                 updateNewPostText={store.updateNewPostText.bind(store)}
-                 addMessage={store.addMessage.bind(store)}
-                 updateMessageElement={store.updateMessageElement.bind(store)}/>
+                 dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
