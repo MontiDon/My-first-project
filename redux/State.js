@@ -1,8 +1,11 @@
-import React from 'react';
+import profileReducer from "./Profile-reducer";
+import dialogsReducer from "./Dialogs-reducer";
+import sidebarReducer from "./Sidebar-reducer";
+
 
 let store = {
 
-    _state: {
+    _state: { // Скрытые данные начинаются с _
 
         profilePage: {
             posts: [
@@ -36,46 +39,25 @@ let store = {
             ]
         }
     },
-    _callSubscriber() {
+    _callSubscriber() {   // Скрытая функция. обновляет страничку
         console.log('State changed');
     },
 
-    getState() {
+    getState() {   // Скрытая функция. Возвращает данные
         return this._state
     },
-    subscribe(observer) {
+    subscribe(observer) { // обновляет страничку
         this._callSubscriber = observer;
     },
 
-    dispatch(action) {
-        if (action.type === 'ADD-PROFILE-POST') {
-            let newPost = {
-                id: 3,
-                message: this._state.profilePage.newPostText
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-PROFILE-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
+    dispatch(action) { // Наши команды
 
-
-        } else if (action.type === 'ADD-DIALOGS-MESSAGE') {
-            let newMessage = {
-                id: 4,
-                message: this._state.dialogsPage.newMessage
-            }
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessage = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-DIALOGS-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessage = action.newText;
-            this._callSubscriber(this._state);
-        }
-
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._callSubscriber(this._state);
     }
-
 }
+
 
 export default store;

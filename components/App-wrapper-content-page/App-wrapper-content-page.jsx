@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Awcp = () => {
+const Home = () => {
     return (
         <h1 className='app-wrapper-content-text' >Hey user, welcome to my page!</h1>
     )
 }
 
-export default Awcp;
+export default Home;

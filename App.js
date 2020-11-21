@@ -10,7 +10,7 @@ import Settings from "./components/Settings/Settings";
 import Translate from "./components/Translate/Translate";
 import Friends from "./components/Sitebar/Friends/Friends";
 import {BrowserRouter, Route} from "react-router-dom";
-import Awcp from "./components/App-wrapper-content-page/App-wrapper-content-page";
+import Home from "./components/App-wrapper-content-page/App-wrapper-content-page";
 
 
 const App = (props) => {
@@ -32,7 +32,7 @@ const App = (props) => {
                     <Route path='/weather'  render={ () => <Weather />}/>
                     <Route path='/settings'  render={ () => <Settings />}/>
                     <Route path='/translate'  render={ () => <Translate />}/>
-                    <Route path='/home'  render={ () => <Awcp />}/>
+                    <Route path='/home'  render={ () => <Home />}/>
                 </div>
             </div>
         </BrowserRouter>
