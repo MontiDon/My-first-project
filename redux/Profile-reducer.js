@@ -2,7 +2,15 @@ const AddProfilePost = 'ADD-PROFILE-POST';
 const updateProfilePostText = 'UPDATE-PROFILE-POST-TEXT';
 
 
-const profileReducer = (state, action) => {
+let initialState = {
+    posts: [
+        {id: 1, message: 'It`s my first post on React'},
+        {id: 2, message: 'Eee boy!'}
+    ],
+    newPostText: ''
+}
+
+const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case AddProfilePost:

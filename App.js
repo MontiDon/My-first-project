@@ -14,7 +14,6 @@ import Home from "./components/App-wrapper-content-page/App-wrapper-content-page
 
 
 const App = (props) => {
-
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
