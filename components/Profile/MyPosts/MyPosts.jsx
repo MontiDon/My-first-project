@@ -6,14 +6,14 @@ import Post from './Post/Post';
 const MyPosts = (props) => {
 
     let postsElements = props.posts.map( p =>
-        <Post message={p.message}/>);
+        <Post message={p.message} key={p.id}/>);
 
     let addPost = () => {
-        props.addProfilePost();
+        props.addPost();
     }
 
     let onPostChange = (e) => {
-        props.updateProfilePostText(e.target.value);
+        props.onPostChange(e.target.value);
     }
 
     return (

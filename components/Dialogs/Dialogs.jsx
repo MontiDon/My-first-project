@@ -7,17 +7,17 @@ import {Messages} from "./Messages/Messages";
 const Dialogs = (props) => {
 
     let dialogsElement = props.dialogsPage.dialogs.map(d =>
-        <DialogItems name={d.name} id={d.id}/>);
+        <DialogItems name={d.name} id={d.id} key={d.id}/>);
 
     let messagesElements = props.dialogsPage.messages.map(m =>
-        <Messages message={m.message}/>);
+        <Messages message={m.message} key={m.id}/>);
 
     let addMessage = () => {
-        props.addDialogsMessage();
+        props.addMessage();
     }
 
     let updateMessageElement = (e) => {
-        props.updateDialogsMessageText(e.target.value)
+        props.updateMessageElement(e.target.value)
     }
 
     return (

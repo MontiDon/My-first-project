@@ -12,17 +12,21 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
 
+
     switch (action.type) {
         case AddProfilePost:
-            let newPost = {
-                id: 3,
-                message: state.newPostText
-            };
-            state.posts.push(newPost);
-            state.newPostText = '';
+            let body = state.newPostText;
+            return {
+                ...state,
+                posts: [{id: 3, message: body}, ...state.posts],
+                newPostText: ''
+            }
             break;
         case updateProfilePostText:
-            state.newPostText = action.newText;
+            return {
+                ...state,
+                newPostText: action.newText
+            }
             break;
     }
 
@@ -31,7 +35,7 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const addProfilePostActionCreator = () => ({type: AddProfilePost}) // Если мы просто возвращаем константу(что то простое), то можно использовать сокращенную запись.
+export const addProfilePostActionCreator = () => ({type: AddProfilePost}) // Если возвращаем простой тип, то можно использовать сокращенную запись.
 
 export const updateProfilePostTextActionCreator = (text) => {
     return {

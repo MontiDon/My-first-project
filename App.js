@@ -7,24 +7,22 @@ import News from "./components/News/News";
 import Weather from "./components/Weather/Weather";
 import Settings from "./components/Settings/Settings";
 import Translate from "./components/Translate/Translate";
-import Friends from "./components/Sitebar/Friends/Friends";
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/App-wrapper-content-page/App-wrapper-content-page";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import FriendsContainer from "./components/Sitebar/Friends/FriendsContainer";
 
 
-const App = (props) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile'  render={ () => <Profile store={props.store}/>} />
-
-                    <Route path='/dialogs'  render={ () => <DialogsContainer store={props.store}/>} />
-
-                    <Route path='/friends'  render={ () => <Friends sidebar={props.state.sidebar}/>} />
+                    <Route path='/profile'  render={ () => <Profile />} />
+                    <Route path='/dialogs'  render={ () => <DialogsContainer />} />
+                    <Route path='/friends'  render={ () => <FriendsContainer />} />
                     <Route path='/news'  render={ () => <News />}/>
                     <Route path='/weather'  render={ () => <Weather />}/>
                     <Route path='/settings'  render={ () => <Settings />}/>

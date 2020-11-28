@@ -1,3 +1,4 @@
+/*
 import profileReducer from "./Profile-reducer";
 import dialogsReducer from "./Dialogs-reducer";
 import sidebarReducer from "./Sidebar-reducer";
@@ -50,7 +51,7 @@ let store = {
         this._callSubscriber = observer;
     },
 
-    dispatch(action) { // выполняет определенные действия
+    dispatch(action) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
@@ -60,4 +61,4 @@ let store = {
 }
 
 
-export default store;
+export default store;*/
