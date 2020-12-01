@@ -1,0 +1,13 @@
+
+
+.users {
+    display: grid;
+    grid-template-columns: 70px 300px 50px;
+}
+.usersPage {
+    padding: 20px;
+}
+.usersAvatar img {
+    width: 70px;
+    height: 70px;
+}

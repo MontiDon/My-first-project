@@ -11,6 +11,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/App-wrapper-content-page/App-wrapper-content-page";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import FriendsContainer from "./components/Sitebar/Friends/FriendsContainer";
+import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 const App = () => {
@@ -22,6 +24,7 @@ const App = () => {
                 <div className='app-wrapper-content'>
                     <Route path='/profile'  render={ () => <Profile />} />
                     <Route path='/dialogs'  render={ () => <DialogsContainer />} />
+                    <Route path='/users'  render={ () => <UsersContainer />} />
                     <Route path='/friends'  render={ () => <FriendsContainer />} />
                     <Route path='/news'  render={ () => <News />}/>
                     <Route path='/weather'  render={ () => <Weather />}/>

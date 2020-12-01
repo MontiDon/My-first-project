@@ -12,7 +12,6 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
 
-
     switch (action.type) {
         case AddProfilePost:
             let body = state.newPostText;
