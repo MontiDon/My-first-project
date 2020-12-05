@@ -3,10 +3,9 @@ const UNFOLLOW = 'UNFOLLOW';
 const SetUsers = 'SET-USERS';
 
 let initialState = {
-    users: [
+    users: [/*
         {id: 1, followed: true, fullName: 'Dmitry', status: 'Big boss', location: {city:'Moscow', country:'Russia'},
-            userAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSeKZbcVtvtJKKvj5jnN11zgX82gll4TsnmFg&usqp=CAU',
-            userAvatar1: 'https://www.meme-arsenal.com/memes/8dc2704a34bdf8cd2c07e624c7adb1c9.jpg'},
+            userAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSeKZbcVtvtJKKvj5jnN11zgX82gll4TsnmFg&usqp=CAU',},
 
         {id: 2, followed: true, fullName: 'Ilya', status: 'I`m a good man', location: {city:'Moscow', country:'Russia'},
             userAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSeKZbcVtvtJKKvj5jnN11zgX82gll4TsnmFg&usqp=CAU'},
@@ -19,7 +18,7 @@ let initialState = {
 
         {id: 5, followed: true, fullName: 'Nastya', status: 'Just do it!', location: {city:'Tokyo', country:'Japan'},
             userAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSeKZbcVtvtJKKvj5jnN11zgX82gll4TsnmFg&usqp=CAU'}
-    ]
+    */]
 }
 
 const usersReducer = (state = initialState, action) => {
