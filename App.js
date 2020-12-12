@@ -11,7 +11,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/App-wrapper-content-page/App-wrapper-content-page";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import FriendsContainer from "./components/Sitebar/Friends/FriendsContainer";
-import Users from "./components/Users/Users";
 import UsersContainer from "./components/Users/UsersContainer";
 
 
