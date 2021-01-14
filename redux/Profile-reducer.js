@@ -1,5 +1,6 @@
 const AddProfilePost = 'ADD-PROFILE-POST';
-const updateProfilePostText = 'UPDATE-PROFILE-POST-TEXT';
+const UpdateProfilePostText = 'UPDATE-PROFILE-POST-TEXT';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
 
 let initialState = {
@@ -7,7 +8,9 @@ let initialState = {
         {id: 1, message: 'It`s my first post on React'},
         {id: 2, message: 'Eee boy!'}
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null,
+    aboutMe: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -21,12 +24,15 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: ''
             }
             break;
-        case updateProfilePostText:
+        case UpdateProfilePostText:
             return {
                 ...state,
                 newPostText: action.newText
             }
             break;
+        case SET_USER_PROFILE: {
+            return {...state, profile: action.profile}
+        }
     }
 
     return state;
@@ -35,9 +41,9 @@ const profileReducer = (state = initialState, action) => {
 export default profileReducer;
 
 export const addProfilePostActionCreator = () => ({type: AddProfilePost}) // Если возвращаем простой тип, то можно использовать сокращенную запись.
-
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const updateProfilePostTextActionCreator = (text) => {
     return {
-        type: updateProfilePostText, newText: text
+        type: UpdateProfilePostText, newText: text
     }
 }
