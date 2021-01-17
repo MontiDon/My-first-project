@@ -8,7 +8,7 @@ const Loading = 'LOADING';
 let initialState = {
     users: [ ],
     pageSize: 4,
-    totalUsersCount: 1,
+    totalUsersCount: 0,
     currentPage: 1,
     isFetching: true
 }
