@@ -17,3 +17,25 @@ export const userAPI = {
         )
     }
 }
+
+export const unFollowAPI = {
+    unFollow(u = null) {
+        return (
+            instance.delete(`follow/${u.id}`, {}).then(response => {
+                return response.data;
+            })
+        )
+    }
+}
+
+export const followAPI = {
+    follow(u=null){
+        return(
+            instance.post(`follow/${u.id}`, {}).then(response => {
+                return response.data;
+            })
+        )
+    }
+}
+
+
