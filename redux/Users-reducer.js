@@ -1,3 +1,5 @@
+import {userAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SetUsers = 'SET-USERS';
@@ -66,12 +68,55 @@ const usersReducer = (state = initialState, action) => {
 
 
 
-export const follow = (userId) => ({type: FOLLOW, userId})
-export const unfollow = (userId) => ({type: UNFOLLOW, userId})
+export const followSuccess = (userId) => ({type: FOLLOW, userId})
+export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId})
 export const setUsers = (users) => ({type: SetUsers, users})
 export const setCurrentPage = (currentPage) => ({type: SetCurrentPage, currentPage})
 export const setTotalUsersCount = (totalUsersCount) => ({type: SetTotalUsersCount, count: totalUsersCount})
 export const loading = (isFetching) => ({type: Loading, isFetching: isFetching})
 export const toggleFollowingInProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})
+
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+
+        dispatch(loading(true))
+
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(loading(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });
+    }
+}
+
+export const follow = (userId) => {
+
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId));
+        userAPI.follow(userId)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    dispatch(followSuccess(userId))
+                }
+                dispatch(toggleFollowingInProgress(false, userId));
+            });
+    }
+}
+
+export const unfollow = (userId) => {
+
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId));
+        userAPI.unfollow(userId)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    dispatch(unfollowSuccess(userId))
+                }
+                dispatch(toggleFollowingInProgress(false, userId));
+            });
+    }
+}
+
 
 export default usersReducer;

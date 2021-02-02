@@ -9,7 +9,7 @@ const ProfileInfo = (props) => {
     return (
         <div>
             <img src='https://strana.ua/img/article/2625/70_main.jpeg' />
-            <div>NotMyAvatar<div><img src={props.profile.photos.small}/></div></div>
+            <div>Avatar<div><img src={props.profile.photos.small}/></div></div>
             <div>AboutMe: {props.profile.aboutMe}</div>
             <div>Facebook: {props.profile.contacts.facebook}</div>
             <div>Website: {props.profile.contacts.website}</div>

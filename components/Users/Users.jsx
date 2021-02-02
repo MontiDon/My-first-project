@@ -2,7 +2,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {followAPI, unFollowAPI} from "../../api/api";
+import {userAPI} from "../../api/api";
 
 const Users = (props) => {
 
@@ -26,7 +26,7 @@ const Users = (props) => {
             <h2>Users</h2>
             {
                 props.users.map(u => {
-                    console.log(u)
+                    /*console.log(u)*/
                     return (
                         <div key={u.id} className={s.users}>
                         <div>
@@ -38,27 +38,10 @@ const Users = (props) => {
                             <div>
                                 {u.followed
                                     ? <button disabled={props.followingInProgress.some(id=> id === u.id)} onClick={() => {
-
-                                        props.toggleFollowingInProgress(true, u.id);
-                                        unFollowAPI.unFollow(u)
-                                            .then(data => {
-                                                if (data.resultCode == 0) {
-                                                    props.unfollow(u.id)
-                                                }
-                                                props.toggleFollowingInProgress(false, u.id);
-                                            });
-                                    }}>Unfollow</button>
+                                        props.unfollow(u.id)}}>Unfollow</button>
 
                                     : <button disabled={props.followingInProgress.some(id=> id === u.id)} onClick={() => {
-                                        props.toggleFollowingInProgress(true, u.id);
-                                        followAPI.follow(u)
-                                            .then(data => {
-                                                if (data.resultCode == 0) {
-                                                    props.follow(u.id)
-                                                }
-                                                props.toggleFollowingInProgress(false, u.id);
-                                            });
-                                    }}>Follow</button>}
+                                        props.follow(u.id)}}>Follow</button>}
                             </div>
                         </div>
                         <div>
