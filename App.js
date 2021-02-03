@@ -12,6 +12,7 @@ import FriendsContainer from "./components/Sitebar/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
                     <Route path='/settings'  render={ () => <Settings />}/>
                     <Route path='/translate'  render={ () => <Translate />}/>
                     <Route path='/home'  render={ () => <Home />}/>
+                    <Route path='/login'  render={ () => <Login />}/>
                 </div>
             </div>
     )

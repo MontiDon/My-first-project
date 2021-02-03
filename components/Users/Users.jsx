@@ -2,7 +2,6 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {userAPI} from "../../api/api";
 
 const Users = (props) => {
 

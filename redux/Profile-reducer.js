@@ -1,3 +1,5 @@
+import {userAPI} from "../api/api";
+
 const AddProfilePost = 'ADD-PROFILE-POST';
 const UpdateProfilePostText = 'UPDATE-PROFILE-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -42,6 +44,11 @@ export default profileReducer;
 
 export const addProfilePostActionCreator = () => ({type: AddProfilePost}) // Если возвращаем простой тип, то можно использовать сокращенную запись.
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+export const getUserProfile = (userId) => (dispatch) => {
+    userAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data))
+    });
+}
 export const updateProfilePostTextActionCreator = (text) => {
     return {
         type: UpdateProfilePostText, newText: text
