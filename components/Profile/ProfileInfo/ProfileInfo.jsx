@@ -4,12 +4,14 @@ import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
+
     if (!props.profile) {
         return <Preloader />
     }
     return (
         <div>
-            <ProfileStatus status={'Hi user'} />
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <>
             <div><img src={props.profile.photos.small}/></div>
             <div>AboutMe: {props.profile.aboutMe}</div>
             <div>Facebook: {props.profile.contacts.facebook}</div>
@@ -24,6 +26,7 @@ const ProfileInfo = (props) => {
             <div>LookingForAJobDescription: {props.profile.contacts.lookingForAJobDescription}</div>
             <div>FullName: {props.profile.contacts.fullName}</div>
             <div>UserId: {props.profile.contacts.userId}</div>
+            </>
         </div>
     )
 }
