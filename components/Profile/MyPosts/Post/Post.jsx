@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Post.module.css';
-import {safeMin} from "react-time-picker/dist/shared/utils";
 
 const Post = (props) => {
 
