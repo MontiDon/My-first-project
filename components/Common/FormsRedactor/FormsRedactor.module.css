@@ -1,0 +1,10 @@
+.formRedactor.error input,
+.formRedactor.error textarea
+{
+    border: solid red 2px;
+}
+
+.formRedactor.error span
+{
+    color: red;
+}

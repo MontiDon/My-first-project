@@ -1,22 +1,9 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {Field, reduxForm} from "redux-form";
+import {PostFormRedux} from "./AddPostsForm/AddPostsForm";
 
-const AddNewPostForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field name={'newPostText'} component={'textarea'} type="text"/>
-            </div>
-            <div>
-                <button>Add post</button>
-            </div>
-        </form>
-    )
-}
-const PostFormRedux = reduxForm({
-    form: 'ProfileAddNewPostFrom'})(AddNewPostForm)
+
 
 const MyPosts = (props) => {
 
