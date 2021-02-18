@@ -14,10 +14,10 @@ const Header = (props) => {
                 <h1>
                     <NavLink to='/home' className={s.headerName} >It`s my first project on React</NavLink>
                 </h1>
-
                 <div className={s.loginBlock}>
-                    { props.isAuth ? ('Login: ' + props.login)
-                    : <NavLink to={'/login'}>Login</NavLink> }
+                    { props.isAuth
+                        ? <div>{props.login} - <button onClick={props.logout}>Log out</button> </div>
+                        : <NavLink to={'/login'}>Login</NavLink> }
                 </div>
             </div>
         </header>
