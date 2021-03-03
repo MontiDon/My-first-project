@@ -77,12 +77,13 @@ export const loading = (isFetching) => ({type: Loading, isFetching: isFetching})
 export const toggleFollowingInProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})
 
 
-export const getUsers = (currentPage, pageSize) => {
+export const getUsers = (Page, pageSize) => {
     return (dispatch) => {
 
         dispatch(loading(true))
+        dispatch(setCurrentPage(Page))
 
-        userAPI.getUsers(currentPage, pageSize).then(data => {
+        userAPI.getUsers(Page, pageSize).then(data => {
             dispatch(loading(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));
