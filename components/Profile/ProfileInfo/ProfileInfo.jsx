@@ -13,20 +13,20 @@ const ProfileInfo = (props) => {
         <div>
             <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             <>
-            <div><img src={props.profile.photos.small}/></div>
-            <div>AboutMe: {props.profile.aboutMe}</div>
-            <div>Facebook: {props.profile.contacts.facebook}</div>
-            <div>Website: {props.profile.contacts.website}</div>
-            <div>vk: {props.profile.contacts.vk}</div>
-            <div>Twitter: {props.profile.contacts.twitter}</div>
-            <div>Instagram: {props.profile.contacts.instagram}</div>
-            <div>Youtube: {props.profile.contacts.youtube}</div>
-            <div>Github: {props.profile.contacts.github}</div>
-            <div>MainLink: {props.profile.contacts.mainLink}</div>
-            <div>LookingForAJob: {props.profile.contacts.LookingForAJob}</div>
-            <div>LookingForAJobDescription: {props.profile.contacts.lookingForAJobDescription}</div>
-            <div>FullName: {props.profile.contacts.fullName}</div>
-            <div>UserId: {props.profile.contacts.userId}</div>
+                <div><img src={props.profile.photos.small} alt={' '}/></div>
+                <div>FullName: {props.profile.fullName}</div>
+                <div>UserId: {props.profile.userId}</div>
+                <div>AboutMe: {props.profile.aboutMe}</div>
+                <div>Facebook: {props.profile.contacts.facebook}</div>
+                <div>Website: {props.profile.contacts.website}</div>
+                <div>vk: {props.profile.contacts.vk}</div>
+                <div>Twitter: {props.profile.contacts.twitter}</div>
+                <div>Instagram: {props.profile.contacts.instagram}</div>
+                <div>Youtube: {props.profile.contacts.youtube}</div>
+                <div>Github: {props.profile.contacts.github}</div>
+                <div>MainLink: {props.profile.contacts.mainLink}</div>
+                <div>LookingForAJob: {props.profile.LookingForAJob}</div>
+                <div>LookingForAJobDescription: {props.profile.lookingForAJobDescription}</div>
             </>
         </div>
     )

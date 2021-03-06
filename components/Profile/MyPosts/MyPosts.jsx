@@ -4,14 +4,11 @@ import Post from './Post/Post';
 import {PostFormRedux} from "./AddPostsForm/AddPostsForm";
 
 
-
-const MyPosts = (props) => {
-
-    let postsElements = props.posts.map( p =>
+const MyPosts = React.memo(props => {
+    let postsElements = props.posts.map(p =>
         <Post message={p.message} key={p.id}/>);
 
     let addNewPost = (values) => {
-        console.log(values)
         props.addPost(values.newPostText)
     }
 
@@ -24,11 +21,7 @@ const MyPosts = (props) => {
             </div>
         </div>
     )
-}
-
-
-
-
+})
 
 
 export default MyPosts;
