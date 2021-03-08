@@ -1,8 +1,10 @@
 
-
 .users {
     display: grid;
     grid-template-columns: 70px 300px 50px;
+    border: solid black 1px;
+    border-radius: 3px;
+    padding: 3px;
 }
 .usersPage {
     padding: 20px;
@@ -11,6 +13,6 @@
     width: 70px;
     height: 70px;
 }
-.selectedPage {
-    font-weight: bold;
+.padding {
+    padding-bottom: 2px;
 }

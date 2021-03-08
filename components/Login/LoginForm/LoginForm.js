@@ -7,8 +7,7 @@ import style from "../../Common/FormsRedactor/FormsRedactor.module.css"
 const maxLength30 = maxLength(30)
 const minLength6 = minLength(6)
 
-const LoginForm = (props) => {
-    const {handleSubmit, pristine, reset, submitting} = props
+const LoginForm = ({handleSubmit, pristine, reset, submitting, error}) => {
     return(
         <form onSubmit={handleSubmit}>
             <div>
@@ -20,7 +19,7 @@ const LoginForm = (props) => {
             <spam>
                 <Field name={'rememberMe'} component={Input} type="checkbox"/>Remember me
             </spam>
-            {props.error && <div className={style.formSummaryError}>{props.error}</div>}
+            {error && <div className={style.formSummaryError}>{error}</div>}
             <div>
                 <button type="submit">Login</button>
                 <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
