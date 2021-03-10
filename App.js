@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Nav from "./components/Nav/Nav";
 import News from "./components/News/News";
@@ -7,10 +7,10 @@ import Settings from "./components/Settings/Settings";
 import Translate from "./components/Translate/Translate";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import Home from "./components/App-wrapper-content-page/App-wrapper-content-page";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+//import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import FriendsContainer from "./components/Sitebar/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+/*import ProfileContainer from "./components/Profile/ProfileContainer";*/
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -18,7 +18,8 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/App-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
 import store from "./redux/Redux-store";
-
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 class App extends React.Component {
 
@@ -36,8 +37,10 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    </Suspense>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/friends' render={() => <FriendsContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
