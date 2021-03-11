@@ -2,32 +2,42 @@ import React from 'react';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader />
     }
+
+    const setAvatar = (e) => {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
+    }
+
     return (
         <div>
-            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             <>
-                <div><img src={props.profile.photos.small} alt={' '}/></div>
-                <div>FullName: {props.profile.fullName}</div>
-                <div>UserId: {props.profile.userId}</div>
-                <div>AboutMe: {props.profile.aboutMe}</div>
-                <div>Facebook: {props.profile.contacts.facebook}</div>
-                <div>Website: {props.profile.contacts.website}</div>
-                <div>vk: {props.profile.contacts.vk}</div>
-                <div>Twitter: {props.profile.contacts.twitter}</div>
-                <div>Instagram: {props.profile.contacts.instagram}</div>
-                <div>Youtube: {props.profile.contacts.youtube}</div>
-                <div>Github: {props.profile.contacts.github}</div>
-                <div>MainLink: {props.profile.contacts.mainLink}</div>
-                <div>LookingForAJob: {props.profile.LookingForAJob}</div>
-                <div>LookingForAJobDescription: {props.profile.lookingForAJobDescription}</div>
+                <div><img src={profile.photos.large} alt={' '}/></div>
+                {isOwner && <input type="file" onChange={setAvatar}/>}
+                <div>FullName: {profile.fullName}</div>
+                <div>UserId: {profile.userId}</div>
+                <div>AboutMe: {profile.aboutMe}</div>
+                <div>Facebook: {profile.contacts.facebook}</div>
+                <div>Website: {profile.contacts.website}</div>
+                <div>Vk: {profile.contacts.vk}</div>
+                <div>Twitter: {profile.contacts.twitter}</div>
+                <div>Instagram: {profile.contacts.instagram}</div>
+                <div>Youtube: {profile.contacts.youtube}</div>
+                <div>Github: {profile.contacts.github}</div>
+                <div>MainLink: {profile.contacts.mainLink}</div>
+                <div>LookingForAJob: {profile.LookingForAJob}</div>
+                <div>LookingForAJobDescription: {profile.lookingForAJobDescription}</div>
             </>
         </div>
     )
 }
 
 export default ProfileInfo;
+//<div><img src={profile.photos.large} alt={' '}/></div>
+//{isOwner && <input type="file" onChange={setAvatar}/>}
