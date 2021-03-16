@@ -1,5 +1,5 @@
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../../Common/FormsRedactor/FormsRedactor";
+import {createField, Input} from "../../Common/FormsRedactor/FormsRedactor";
 import {maxLength, minLength, required} from "../../../utilities/Validators/Validators";
 import React from "react";
 import style from "../../Common/FormsRedactor/FormsRedactor.module.css"
@@ -7,7 +7,7 @@ import style from "../../Common/FormsRedactor/FormsRedactor.module.css"
 const maxLength30 = maxLength(30)
 const minLength6 = minLength(6)
 
-const LoginForm = ({handleSubmit, pristine, reset, submitting, error}) => {
+const LoginForm = ({handleSubmit, pristine, reset, submitting, error, captcha}) => {
     return(
         <form onSubmit={handleSubmit}>
             <div>
@@ -19,7 +19,11 @@ const LoginForm = ({handleSubmit, pristine, reset, submitting, error}) => {
             <spam>
                 <Field name={'rememberMe'} component={Input} type="checkbox"/>Remember me
             </spam>
+            <div>
             {error && <div className={style.formSummaryError}>{error}</div>}
+            {captcha && <img src={captcha} alt=""/>}
+            {captcha && createField('Symbol from image', 'captcha', [required], Input)}
+            </div>
             <div>
                 <button type="submit">Login</button>
                 <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
