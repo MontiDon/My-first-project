@@ -19,10 +19,10 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
 
     return <div className={styles.paginator}>
 
-        <span className={cn([styles.selectedPage])}
-              onClick={() => {
+        <span>
+            <button onClick={() => {
                 onPageChanged();
-            }}>first </span>
+            }}>first</button></span>
 
         <span>
             {portionNumber > 1 &&

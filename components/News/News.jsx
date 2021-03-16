@@ -3,7 +3,7 @@ import s from './News.module.css'
 
 const News = (props) => {
     return (
-        <div className='news'>
+        <div className={s.news}>
             <div>
                 My News
             </div>

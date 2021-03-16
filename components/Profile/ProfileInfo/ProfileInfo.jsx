@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import s from './ProfileInfo.module.css'
+import {ProfileDescriptionReduxForm} from "./ProfileDescriptionForm";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
+
+    let [editMode, setEditMode] = useState(false)
 
     if (!profile) {
-        return <Preloader />
+        return <Preloader/>
     }
 
     const setAvatar = (e) => {
@@ -14,30 +18,42 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         }
     }
 
+    const onSubmit = (formData) => {
+        saveProfile(formData).then(
+            () => {setEditMode(false)}
+        )
+    }
+
     return (
         <div>
             <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-            <>
-                <div><img src={profile.photos.large} alt={' '}/></div>
-                {isOwner && <input type="file" onChange={setAvatar}/>}
-                <div>FullName: {profile.fullName}</div>
-                <div>UserId: {profile.userId}</div>
-                <div>AboutMe: {profile.aboutMe}</div>
-                <div>Facebook: {profile.contacts.facebook}</div>
-                <div>Website: {profile.contacts.website}</div>
-                <div>Vk: {profile.contacts.vk}</div>
-                <div>Twitter: {profile.contacts.twitter}</div>
-                <div>Instagram: {profile.contacts.instagram}</div>
-                <div>Youtube: {profile.contacts.youtube}</div>
-                <div>Github: {profile.contacts.github}</div>
-                <div>MainLink: {profile.contacts.mainLink}</div>
-                <div>LookingForAJob: {profile.LookingForAJob}</div>
-                <div>LookingForAJobDescription: {profile.lookingForAJobDescription}</div>
-            </>
+            <div><img src={profile.photos.small} alt={' '}/></div>
+            {isOwner && <input type="file" onChange={setAvatar}/>}
+            <div>
+                {editMode ? <ProfileDescriptionReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile}/>
+                : <ProfileDescription profile={profile} isOwner={{isOwner}} toEditMode={()=> {setEditMode(true)}}/>}
+            </div>
         </div>
     )
 }
 
+const ProfileDescription = ({profile, isOwner, toEditMode}) => {
+    return <>
+        {isOwner && <div><button onClick={toEditMode}>editMode</button></div>}
+        <div><b>FullName: </b>{profile.fullName}</div>
+        <div><b>UserId: </b>{profile.userId}</div>
+        <div><b>AboutMe: </b>{profile.aboutMe}</div>
+        <div><b>Looking for a job: </b>{profile.lookingForAJob ? 'Yes' : 'No'}</div>
+        {profile.lookingForAJob &&
+        <div><b>Looking for a job description: </b>{profile.lookingForAJobDescription}</div>}
+        <div><b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>})}</div>
+
+    </>
+}
+
+const Contact = ({contactTitle, contactValue}) => {
+    return <div className={s.contacts}><b>{contactTitle}</b>: {contactValue}</div>
+}
+
 export default ProfileInfo;
-//<div><img src={profile.photos.large} alt={' '}/></div>
-//{isOwner && <input type="file" onChange={setAvatar}/>}

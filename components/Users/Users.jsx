@@ -3,7 +3,7 @@ import React from "react";
 import Paginator from "../Common/Paginator/Paginator";
 import User from "./User";
 
-const Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}) => {
+const Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, isFetching, ...props}) => {
     return (
         <div className={s.usersPage}>
 
@@ -13,7 +13,7 @@ const Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ..
             <h2>Users</h2>
 
             {users.map(u => <User key={u.id} user={u} followingInProgress={props.followingInProgress}
-                                     unfollow={props.unfollow} follow={props.follow}/>)}
+                                  unfollow={props.unfollow} follow={props.follow}/>)}
         </div>
     )
 }

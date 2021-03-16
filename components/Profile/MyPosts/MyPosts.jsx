@@ -6,7 +6,7 @@ import {PostFormRedux} from "./AddPostsForm/AddPostsForm";
 
 const MyPosts = React.memo(props => {
     let postsElements = props.posts.map(p =>
-        <Post message={p.message} key={p.id}/>);
+        <Post key={p.id} message={p.message} key={p.id}/>);
 
     let addNewPost = (values) => {
         props.addPost(values.newPostText)

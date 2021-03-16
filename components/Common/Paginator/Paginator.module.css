@@ -10,3 +10,9 @@
     font-weight: bold;
     border-color: black;
 }
+.hover:hover {
+    color: #b31159;
+}
+.pageNumber:hover {
+    color: #b31159;
+}
