@@ -1,1 +1,0 @@
-{"version":3,"sources":["MyPosts.module.css","Post.module.css"],"names":[],"mappings":"AAAA,4BACI,YACJ,CACA,sBACI,eACJ,CCLA,sBACI,UACJ","file":"3.f0152bc7.chunk.css","sourcesContent":[".MyPostsArea {\r\n    padding: 20px;\r\n}\r\n.Posts {\r\n    margin-top: 10px;\r\n}\r\n",".item img {\r\n    width: 30px;\r\n}"]}
