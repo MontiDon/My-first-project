@@ -53,7 +53,7 @@ const ProfileDescription = ({profile, isOwner, toEditMode}) => {
 }
 
 const Contact = ({contactTitle, contactValue}) => {
-    return <div className={s.contacts}><b>{contactTitle}</b>: {contactValue}</div>
+    return <div className={s.contacts}><b>{contactTitle}</b>: <a href={contactValue}>{contactValue}</a></div>
 }
 
 export default ProfileInfo;

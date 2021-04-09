@@ -3,7 +3,7 @@ import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../../Common/FormsRedactor/FormsRedactor";
 import React from "react";
 
-const maxLength5 = maxLength(5)
+const maxLength5 = maxLength(30)
 
 const AddNewPostForm = (props) => {
     return (
