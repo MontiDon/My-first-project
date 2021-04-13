@@ -2,9 +2,18 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {UsersType} from "../../types/Types";
 
 
-const User = ({user, followingInProgress, unfollow, follow}) => {
+type PropsType = {
+    key: number
+    user: UsersType
+    followingInProgress: Array<number>
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
+}
+
+const User: React.FC<PropsType> = ({user, followingInProgress, unfollow, follow}) => {
     return (
         <div className={s.padding}>
             <div className={s.users}>

@@ -39,7 +39,7 @@ class App extends React.Component {
                     <Suspense fallback={<div>Loading...</div>}>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     </Suspense>
-                    <Route path='/users' render={() => <UsersContainer pageTitle={'Student'}/>}/>
+                    <Route path='/users' render={() => <UsersContainer pageTitle={'Students'}/>}/>
                     <Route path='/friends' render={() => <FriendsContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/weather' render={() => <Weather/>}/>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProfileType } from "../types/Types";
 
 const instance = axios.create({
     withCredentials: true,
@@ -17,14 +18,14 @@ export const userAPI = {
             })
         )
     },
-    unfollow(userId) {
+    unfollow(userId: number) {
         return (
             instance.delete(`follow/${userId}`, {}).then(response => {
                 return response.data;
             })
         )
     },
-    follow(userId) {
+    follow(userId: number) {
         return (
             instance.post(`follow/${userId}`, {}).then(response => {
                 return response.data;
@@ -35,22 +36,22 @@ export const userAPI = {
 
 export const profileAPI = {
 
-    getProfile (userId) {
+    getProfile (userId: number) {
         return(
             instance.get(`profile/` + userId)
         )
     },
-    getStatus (userId) {
+    getStatus (userId: number) {
         return(
             instance.get(`profile/status/` + userId)
         )
     },
-    updateStatus (status) {
+    updateStatus (status: string) {
         return(
             instance.put(`profile/status`, {status: status})
         )
     },
-    savePhoto (file) {
+    savePhoto (file: File) {
         const formData = new FormData()
         formData.append('image', file)
         return(
@@ -61,22 +62,38 @@ export const profileAPI = {
             })
         )
     },
-    saveProfile (profile) {
+    saveProfile (profile: ProfileType) {
         return(
             instance.put(`profile`, profile)
         )
     }
 }
-
+export enum ResultCode {
+    Success = 0,
+    Error = 1
+}
+export enum ResultCodeCaptcha {
+    CaptchaIsRequired = 10
+}
+type Me = {
+    data: { id: number, email: string, login: string }
+    resultCode: ResultCode | ResultCodeCaptcha
+    messages: Array<string>
+}
+type Login = {
+    data: { userId: number}
+    resultCode: ResultCode
+    messages: Array<string>
+}
 export const authAPI = {
     me() {
         return(
-            instance.get(`auth/me`)
+            instance.get<Me>(`auth/me`).then(response => response.data)
         )
     },
-    login(email, password, rememberMe = false, captcha = null) {
+    login(email: string, password: number, rememberMe = false, captcha?: string) {
         return(
-            instance.post(`auth/login`, {email, password, rememberMe, captcha})
+            instance.post<Login>(`auth/login`, {email, password, rememberMe, captcha}).then(response => response.data)
         )
     },
     logout() {
@@ -85,6 +102,7 @@ export const authAPI = {
         )
     }
 }
+
 export const securityAPI = {
     getCaptcha() {
         return(

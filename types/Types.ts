@@ -20,10 +20,10 @@ export type ProfileType = {
     contacts : ContactsType
     photos: PhotosType
 }
-
 export type UsersType = {
     id: number
     name: string
     status: string
-    photos: ProfileType
+    photos: PhotosType
+    followed: boolean
 }

@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./FormsRedactor.module.css"
 import {Field} from "redux-form";
+import {ValidatorsType} from "../../../utilities/Validators/Validators";
 
-export const Textarea = ({input, meta, ...props}) => {
+type FCType = (data: { input: () => void, meta: { touched: boolean, error: string } }) => void
+export const Textarea: FCType = ({input, meta, ...props}) => {
     let showError = meta.touched && meta.error
     return(
         <div className={styles.formRedactor + " " + (showError ? styles.error: '')}>
@@ -13,7 +15,7 @@ export const Textarea = ({input, meta, ...props}) => {
         </div>
     )
 }
-export const Input = ({input, meta, ...props}) => {
+export const Input: FCType = ({input, meta, ...props}) => {
     let showError = meta.touched && meta.error
     return(
         <div className={styles.formRedactor + " " + (showError ? styles.error: '')}>
@@ -24,7 +26,10 @@ export const Input = ({input, meta, ...props}) => {
         </div>
     )
 }
-export const createField = (placeholder, name, validators, component, props = {}, text = "") => {
+
+export const createField = (placeholder: string, name: string, validators: Array<ValidatorsType>,
+                            component: FCType,
+                            props = {}, text = "") => {
     return (
     <span>
         <Field placeholder={placeholder} name={name}

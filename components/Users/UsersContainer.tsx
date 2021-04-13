@@ -32,6 +32,7 @@ type OwnProps = {
 }
 
 type Props = MapStateToProps & MapDispatchToProps & OwnProps
+
 class UsersContainer extends React.Component<Props> {
 
     componentDidMount() {
@@ -46,17 +47,20 @@ class UsersContainer extends React.Component<Props> {
 
     render() {
         return <>
-            <h2>{this.props.pageTitle}</h2>
-            {this.props.isFetching ? <Preloader /> : null}
-            <Users totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   onPageChanged={this.onPageChanged}
-                   users={this.props.users}
-                   unfollow={this.props.unfollow}
-                   follow={this.props.follow}
-                   followingInProgress={this.props.followingInProgress}
-            />
+            {this.props.isFetching ? <Preloader /> :
+                <>
+                    <h2>{this.props.pageTitle}</h2>
+                    <Users totalUsersCount={this.props.totalUsersCount}
+                           pageSize={this.props.pageSize}
+                           currentPage={this.props.currentPage}
+                           onPageChanged={this.onPageChanged}
+                           users={this.props.users}
+                           unfollow={this.props.unfollow}
+                           follow={this.props.follow}
+                           followingInProgress={this.props.followingInProgress}
+                    />
+                </>
+            }
         </>
     }
 }

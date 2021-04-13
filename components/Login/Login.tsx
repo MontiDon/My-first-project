@@ -3,10 +3,23 @@ import {LoginReduxForm} from "./LoginForm/LoginForm";
 import {connect} from "react-redux";
 import {login} from "../../redux/Auth-reducer";
 import {Redirect} from "react-router-dom";
+import {AppStateType} from "../../redux/Redux-store";
 
-
-const Login = (props) => {
-    const onSubmit = (formData) => {
+type MapStateToProps = {
+    isAuth: boolean
+    captcha: string | null
+}
+type MapDispatchToProps = {
+    login: (email: string, password: number, rememberMe: boolean, captcha: string) => void
+}
+export type FormDataTypes = {
+    email: string
+    password: number
+    rememberMe: boolean
+    captcha: string
+}
+const Login: React.FC<MapStateToProps & MapDispatchToProps> = (props) => {
+    const onSubmit = (formData: FormDataTypes) => {
         props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
     if (props.isAuth) {
@@ -20,7 +33,7 @@ const Login = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType): MapStateToProps => ({
     isAuth: state.auth.isAuth,
     captcha: state.auth.captcha
 });

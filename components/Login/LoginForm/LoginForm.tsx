@@ -1,13 +1,17 @@
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {createField, Input} from "../../Common/FormsRedactor/FormsRedactor";
 import {maxLength, minLength, required} from "../../../utilities/Validators/Validators";
 import React from "react";
 import style from "../../Common/FormsRedactor/FormsRedactor.module.css"
+import {FormDataTypes} from "../Login";
 
 const maxLength30 = maxLength(30)
 const minLength6 = minLength(6)
 
-const LoginForm = ({handleSubmit, pristine, reset, submitting, error, captcha}) => {
+type OwnProps = {
+    captcha: string | null
+}
+const LoginForm: React.FC<InjectedFormProps<FormDataTypes, OwnProps> & OwnProps> = ({handleSubmit, pristine, reset, submitting, error, captcha}) => {
     return(
         <form onSubmit={handleSubmit}>
             <div>
@@ -16,9 +20,9 @@ const LoginForm = ({handleSubmit, pristine, reset, submitting, error, captcha}) 
             <div>
                 <Field name={'password'} component={Input} placeholder={'Password'} validate={[required, minLength6]} type={'password'}/>
             </div>
-            <spam>
+            <span>
                 <Field name={'rememberMe'} component={Input} type="checkbox"/>Remember me
-            </spam>
+            </span>
             <div>
             {error && <div className={style.formSummaryError}>{error}</div>}
             {captcha && <img src={captcha} alt=""/>}
@@ -32,7 +36,7 @@ const LoginForm = ({handleSubmit, pristine, reset, submitting, error, captcha}) 
     )
 }
 
-export const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+export const LoginReduxForm = reduxForm<FormDataTypes, OwnProps>({form: 'login'})(LoginForm)
 
 
 
