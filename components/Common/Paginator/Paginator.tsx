@@ -46,7 +46,7 @@ const Paginator: React.FC<Props> = ({totalItemsCount, pageSize, currentPage, onP
                         [styles.selectedPage]: currentPage === p
                     }, styles.pageNumber)}
                                  key={p}
-                                 onClick={(e) => {
+                                 onClick={() => {
                                      onPageChanged(p);
                                  }}>{p}</span>
                 })}

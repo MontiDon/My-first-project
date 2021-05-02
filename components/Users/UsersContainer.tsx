@@ -14,7 +14,7 @@ import {
 import {UsersType} from "../../types/Types";
 import {AppStateType} from "../../redux/Redux-store";
 
-type MapStateToProps = {
+type MapStateToPropsType = {
     currentPage: number
     pageSize: number
     isFetching: boolean
@@ -31,7 +31,7 @@ type OwnProps = {
     pageTitle: string
 }
 
-type Props = MapStateToProps & MapDispatchToProps & OwnProps
+type Props = MapStateToPropsType & MapDispatchToProps & OwnProps
 
 class UsersContainer extends React.Component<Props> {
 
@@ -66,7 +66,7 @@ class UsersContainer extends React.Component<Props> {
 }
 
 
-let mapStateToProps = (state: AppStateType): MapStateToProps => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: getUsersSelector(state),
         pageSize: getPageSize(state),
@@ -79,7 +79,7 @@ let mapStateToProps = (state: AppStateType): MapStateToProps => {
 
 
 export default compose(
-    connect<MapStateToProps, MapDispatchToProps, OwnProps, AppStateType>(mapStateToProps, {follow, unfollow, getUsers})
+    connect<MapStateToPropsType, MapDispatchToProps, OwnProps, AppStateType>(mapStateToProps, {follow, unfollow, getUsers})
 )(UsersContainer)
 
 

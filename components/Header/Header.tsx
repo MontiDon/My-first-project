@@ -2,13 +2,22 @@ import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 
-function Header(props) {
+export type MapPropsType = {
+    isAuth: boolean
+    login: string | null
+}
+export type DispatchPropsType = {
+    logout: () => void
+}
+
+const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
     return (
         <header className={s.header}>
             <div>
                 <NavLink to={'/home'}>
                     <img
-                        src='https://st3.depositphotos.com/4035913/14685/v/450/depositphotos_146856205-stock-illustration-rs-letter-logo-design-with.jpg' alt={''}/>
+                        src='https://st3.depositphotos.com/4035913/14685/v/450/depositphotos_146856205-stock-illustration-rs-letter-logo-design-with.jpg'
+                        alt={''}/>
                 </NavLink>
             </div>
             <div className={s.headerHead}>

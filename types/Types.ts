@@ -19,6 +19,7 @@ export type ProfileType = {
     fullName: string
     contacts : ContactsType
     photos: PhotosType
+    aboutMe: string
 }
 export type UsersType = {
     id: number
@@ -26,4 +27,8 @@ export type UsersType = {
     status: string
     photos: PhotosType
     followed: boolean
+}
+export type PostType = {
+    id: number
+    message: string
 }

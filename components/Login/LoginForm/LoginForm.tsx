@@ -11,22 +11,25 @@ const minLength6 = minLength(6)
 type OwnProps = {
     captcha: string | null
 }
-const LoginForm: React.FC<InjectedFormProps<FormDataTypes, OwnProps> & OwnProps> = ({handleSubmit, pristine, reset, submitting, error, captcha}) => {
-    return(
+const LoginForm: React.FC<InjectedFormProps<FormDataTypes, OwnProps> & OwnProps> = ({handleSubmit,
+                       pristine, reset, submitting, error, captcha}) => {
+    return (
         <form onSubmit={handleSubmit}>
             <div>
-                <Field name={'email'} component={Input} placeholder={'Email'} validate={[required, maxLength30]}/>
+                {createField('Email', 'email', [required, maxLength30], Input)}
+                {/*<Field name={'email'} component={Input} placeholder={'Email'} validate={[required, maxLength30]}/>*/}
             </div>
             <div>
-                <Field name={'password'} component={Input} placeholder={'Password'} validate={[required, minLength6]} type={'password'}/>
+                <Field name={'password'} component={Input} placeholder={'Password'} validate={[required, minLength6]}
+                       type={'password'}/>
             </div>
             <span>
                 <Field name={'rememberMe'} component={Input} type="checkbox"/>Remember me
             </span>
             <div>
-            {error && <div className={style.formSummaryError}>{error}</div>}
-            {captcha && <img src={captcha} alt=""/>}
-            {captcha && createField('Symbol from image', 'captcha', [required], Input)}
+                {error && <div className={style.formSummaryError}>{error}</div>}
+                {captcha && <img src={captcha} alt=""/>}
+                {captcha && createField('Symbol from image', 'captcha', [required], Input)}
             </div>
             <div>
                 <button type="submit">Login</button>

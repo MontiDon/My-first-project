@@ -3,35 +3,38 @@ import styles from "./FormsRedactor.module.css"
 import {Field} from "redux-form";
 import {ValidatorsType} from "../../../utilities/Validators/Validators";
 
-type FCType = (data: { input: () => void, meta: { touched: boolean, error: string } }) => void
+type FCType = (data: { input: () => void, meta: { touched: boolean, error: string } }) => React.ReactNode
 export const Textarea: FCType = ({input, meta, ...props}) => {
     let showError = meta.touched && meta.error
-    return(
-        <div className={styles.formRedactor + " " + (showError ? styles.error: '')}>
+    return (
+        <div className={styles.formRedactor + " " + (showError ? styles.error : '')}>
             <div>
                 <textarea {...input} {...props} />
             </div>
-            { showError && <span>{meta.error}</span> }
+            {showError && <span>{meta.error}</span>}
         </div>
     )
 }
 export const Input: FCType = ({input, meta, ...props}) => {
     let showError = meta.touched && meta.error
-    return(
-        <div className={styles.formRedactor + " " + (showError ? styles.error: '')}>
+    return (
+        <div className={styles.formRedactor + " " + (showError ? styles.error : '')}>
             <div>
                 <input {...input} {...props} />
             </div>
-            { showError && <span>{meta.error}</span> }
+            {showError && <span>{meta.error}</span>}
         </div>
     )
 }
 
-export const createField = (placeholder: string, name: string, validators: Array<ValidatorsType>,
+export const createField = (placeholder: string | undefined,
+                            name: string,
+                            validators: Array<ValidatorsType>,
                             component: FCType,
-                            props = {}, text = "") => {
+                            props = {},
+                            text = "") => {
     return (
-    <span>
+        <span>
         <Field placeholder={placeholder} name={name}
                validate={validators}
                component={component}
@@ -40,3 +43,5 @@ export const createField = (placeholder: string, name: string, validators: Array
     </span>
     )
 }
+
+export type GetStringCase<T> = Extract<keyof T, string>

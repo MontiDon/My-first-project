@@ -1,7 +1,11 @@
 import React from 'react';
 import s from './Post.module.css';
 
-const Post = (props) => {
+type MapStateToPropsType = {
+    message: string
+}
+
+const Post: React.FC<MapStateToPropsType> = (props) => {
 
     return (
         <div className={s.item}>

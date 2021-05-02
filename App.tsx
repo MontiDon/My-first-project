@@ -1,13 +1,8 @@
-import React, { Suspense } from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import Nav from "./components/Nav/Nav";
-import News from "./components/News/News";
-import Weather from "./components/Weather/Weather";
-import Settings from "./components/Settings/Settings";
-import Translate from "./components/Translate/Translate";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import Home from "./components/App-wrapper-content-page/App-wrapper-content-page";
-import FriendsContainer from "./components/Sitebar/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -15,11 +10,17 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/App-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
-import store from "./redux/Redux-store";
+import store, {AppStateType} from "./redux/Redux-store";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer')); // подгружает страничку(компоненту) только при нажатии
 
-class App extends React.Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    initializeApp: () => void
+}
+
+class App extends React.Component<MapPropsType & DispatchPropsType> {
 
     componentDidMount() {
         this.props.initializeApp()
@@ -40,11 +41,6 @@ class App extends React.Component {
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     </Suspense>
                     <Route path='/users' render={() => <UsersContainer pageTitle={'Students'}/>}/>
-                    <Route path='/friends' render={() => <FriendsContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/weather' render={() => <Weather/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/translate' render={() => <Translate/>}/>
                     <Route path='/home' render={() => <Home/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
@@ -52,15 +48,15 @@ class App extends React.Component {
         )
     }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
-let AppContainer = compose(
+let AppContainer = compose<React.ComponentType>(
         withRouter,
         connect(mapStateToProps, {initializeApp}))(App);
 
-const MyApp = (props) => {
+const MyApp: React.FC = () => {
     return <React.StrictMode>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
