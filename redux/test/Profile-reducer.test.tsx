@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import profileReducer, {addProfilePostActionCreator, deletePost} from "../Profile-reducer";
 
 let state = {
@@ -24,4 +24,4 @@ it('delete post', () => {
     let action = deletePost(3)
     let newState = profileReducer(state, action)
     expect(newState.posts.length).toBe(2)
-})
+})*/

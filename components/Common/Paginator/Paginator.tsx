@@ -9,7 +9,7 @@ type Props = {
     onPageChanged: (pageNumber: number) => void
     portionSize?: number
 }
-const Paginator: React.FC<Props> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 5}) => {
+const Paginator: React.FC<Props> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 6}) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
 

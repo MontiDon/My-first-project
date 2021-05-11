@@ -1,16 +1,20 @@
 import {updateObjectInArray} from "../utilities/Bll";
 import {UsersType} from "../types/Types";
-import {AppStateType, BaseThunkType, InferActionsTypes} from "./Redux-store";
-import { Dispatch } from "redux";
+import {BaseThunkType, InferActionsTypes} from "./Redux-store";
+import {Dispatch} from "redux";
 import {userAPI} from "../api/users-api";
 
 let initialState = {
     users: [ ] as Array<UsersType>,
-    pageSize: 4,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true,
-    followingInProgress: [] as Array<number>
+    isFetching: false,
+    followingInProgress: [] as Array<number>,
+    filter: {
+        term: '',
+        friend: null as null | boolean
+    }
 }
 
 const usersReducer = (state = initialState, action: ActionTypes): InitialStateType => {
@@ -38,12 +42,15 @@ const usersReducer = (state = initialState, action: ActionTypes): InitialStateTy
         case "Loading": {
             return {...state, isFetching: action.isFetching}
         }
+        case "SetFilter": {
+            return {...state, filter: action.payload}
+        }
         case "TOGGLE_IS_FOLLOWING_PROGRESS": {
             return {
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
         default:
@@ -55,18 +62,19 @@ export const actions = {
     unfollowSuccess: (userId: number) => ({type: 'UNFOLLOW', userId} as const),
     setUsers: (users: Array<UsersType>) => ({type: 'SetUsers', users} as const),
     setCurrentPage: (currentPage: number) => ({type: 'SetCurrentPage', currentPage} as const),
+    setFilter: (filter: FilterType) => ({type: 'SetFilter', payload: filter} as const),
     setTotalUsersCount: (totalUsersCount: number) => ({type: 'SetTotalUsersCount', count: totalUsersCount} as const),
     loading: (isFetching: boolean) => ({type: 'Loading', isFetching: isFetching} as const),
     toggleFollowingInProgress: (isFetching: boolean, userId: number) => ({type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId} as const)
 
 }
-export const getUsers = (Page: number, pageSize: number): ThunkType => {
+export const getUsers = (Page: number, pageSize: number, filter: FilterType): ThunkType => {
     return async (dispatch: DispatchType) => {
 
         dispatch(actions.loading(true))
         dispatch(actions.setCurrentPage(Page))
-
-        let data = await userAPI.getUsers(Page, pageSize)
+        dispatch(actions.setFilter(filter))
+        let data = await userAPI.getUsers(Page, pageSize, filter.term, filter.friend)
 
         dispatch(actions.loading(false));
         dispatch(actions.setUsers(data.items));
@@ -77,26 +85,27 @@ const _followUnfollowFlow = async (dispatch: DispatchType, userId: number, apiMe
 
     dispatch(actions.toggleFollowingInProgress(true, userId));
     let data = await apiMethod(userId)
-    if (data.resultCode == 0) {
+    if (data.resultCode === 0) {
         dispatch(actionCreator(userId))
     }
     dispatch(actions.toggleFollowingInProgress(false, userId));
 }
 export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, userAPI.follow.bind(userAPI), actions.followSuccess)
+        await _followUnfollowFlow(dispatch, userId, userAPI.follow.bind(userAPI), actions.followSuccess)
     }
 }
 export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, userAPI.unfollow.bind(userAPI), actions.unfollowSuccess)
+        await _followUnfollowFlow(dispatch, userId, userAPI.unfollow.bind(userAPI), actions.unfollowSuccess)
     }
 }
 
 export default usersReducer;
 
-type GetStateType = () => AppStateType
+
 type DispatchType = Dispatch<ActionTypes>
 type ThunkType = BaseThunkType<ActionTypes>
 type ActionTypes = InferActionsTypes<typeof actions>
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
+export type FilterType = typeof initialState.filter

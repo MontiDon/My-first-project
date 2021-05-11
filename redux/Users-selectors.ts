@@ -38,3 +38,6 @@ const getFollowingInProgressSelector = (state: AppStateType) => {
 export const getFollowingInProgress = createSelector(getFollowingInProgressSelector, (followingInProgress) => {
     return followingInProgress
 })
+export const getUsersFilter = (state: AppStateType) => {
+    return state.usersPage.filter
+}
