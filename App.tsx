@@ -3,9 +3,9 @@ import './App.css';
 import Nav from "./components/Nav/Nav";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import Home from "./components/App-wrapper-content-page/App-wrapper-content-page";
-import UsersContainer from "./components/Users/UsersContainer";
+import {UsersPage} from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import {LoginPage} from "./components/Login/LoginPage";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/App-reducer";
@@ -40,9 +40,9 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                     <Suspense fallback={<div>Loading...</div>}>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     </Suspense>
-                    <Route path='/users' render={() => <UsersContainer pageTitle={'Students'}/>}/>
+                    <Route path='/users' render={() => <UsersPage pageTitle={'Students'}/>}/>
                     <Route path='/home' render={() => <Home/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
+                    <Route path='/login' render={() => <LoginPage/>}/>
                 </div>
             </div>
         )

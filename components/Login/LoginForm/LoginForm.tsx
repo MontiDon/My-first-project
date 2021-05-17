@@ -3,7 +3,7 @@ import {createField, Input} from "../../Common/FormsRedactor/FormsRedactor";
 import {maxLength, minLength, required} from "../../../utilities/Validators/Validators";
 import React from "react";
 import style from "../../Common/FormsRedactor/FormsRedactor.module.css"
-import {FormDataTypes} from "../Login";
+import {FormDataTypes} from "../LoginPage";
 
 const maxLength30 = maxLength(30)
 const minLength6 = minLength(6)

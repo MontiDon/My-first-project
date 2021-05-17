@@ -2,7 +2,7 @@ import {Field, Form, Formik} from "formik";
 import React from "react";
 import {FilterType} from "../../redux/Users-reducer";
 
-const usersSearchFormValidate = (values: any) => {
+const usersSearchFormValidate = () => {
     const errors = {}
     return errors
 }
@@ -33,7 +33,7 @@ export const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
             >
                 {({isSubmitting}) => (
                     <Form>
-                        <Field type="text" name="term"/>
+                        <Field type="text" name="term" placeholder='Name'/>
                         <Field as="select" name="friend">
                             <option value="null">All</option>
                             <option value="true">Only followed</option>
