@@ -1,18 +1,45 @@
 import React from 'react';
-import s from './Header.module.css';
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {Avatar, Button, Col, Layout, Menu, Row} from "antd";
+import {UserOutlined} from "@ant-design/icons";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../redux/Redux-store";
+import {selectIsAuth} from "../../redux/Auth-selectors";
+import {logout} from "../../redux/Auth-reducer";
 
-export type MapPropsType = {
-    isAuth: boolean
-    login: string | null
-}
-export type DispatchPropsType = {
-    logout: () => void
-}
+export const Header: React.FC = () => {
 
-const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+    const isAuth = useSelector(selectIsAuth)
+    const login = useSelector((state: AppStateType) => state.auth.login)
+
+    const dispatch = useDispatch()
+    const _logout = () => {
+        dispatch(logout())
+    }
+
+    const {Header} = Layout;
     return (
-        <header className={s.header}>
+        <Header className="header">
+            <Row>
+                <Col span={19}>
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                        <Menu.Item key="1"><Link to="/developers">Developers</Link></Menu.Item>
+                    </Menu>
+                </Col>
+                <Col span={5}>
+                    {isAuth
+                        ? <div>
+                            <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
+                            <span style={{color: 'white'}}>{login} </span><Button onClick={_logout}>Log out</Button>
+                        </div>
+                        : <Link to={'/login'}>Login</Link>}
+                </Col>
+            </Row>
+        </Header>
+    )
+}
+
+/*        <header className={s.header}>
             <div>
                 <NavLink to={'/home'}>
                     <img
@@ -30,10 +57,4 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
                         : <NavLink to={'/login'}>Login</NavLink>}
                 </div>
             </div>
-        </header>
-
-    )
-
-}
-
-export default Header;
+        </header>*/

@@ -3,13 +3,14 @@ import {UsersType} from "../types/Types";
 import {BaseThunkType, InferActionsTypes} from "./Redux-store";
 import {Dispatch} from "redux";
 import {userAPI} from "../api/users-api";
+import { APIResponseType } from "../api/api";
 
 let initialState = {
     users: [ ] as Array<UsersType>,
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false,
+    isFetching: true,
     followingInProgress: [] as Array<number>,
     filter: {
         term: '',
@@ -68,20 +69,22 @@ export const actions = {
     toggleFollowingInProgress: (isFetching: boolean, userId: number) => ({type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId} as const)
 
 }
-export const getUsers = (Page: number, pageSize: number, filter: FilterType): ThunkType => {
-    return async (dispatch: DispatchType) => {
+export const getUsers = (page: number, pageSize: number, filter: FilterType): ThunkType => {
+    return async (dispatch) => {
 
         dispatch(actions.loading(true))
-        dispatch(actions.setCurrentPage(Page))
+        dispatch(actions.setCurrentPage(page))
         dispatch(actions.setFilter(filter))
-        let data = await userAPI.getUsers(Page, pageSize, filter.term, filter.friend)
+        let data = await userAPI.getUsers(page, pageSize, filter.term, filter.friend)
 
         dispatch(actions.loading(false));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setTotalUsersCount(data.totalCount));
     }
 }
-const _followUnfollowFlow = async (dispatch: DispatchType, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionTypes) => {
+const _followUnfollowFlow = async (dispatch: Dispatch<ActionTypes>, userId: number,
+                                   apiMethod: (userId: number) => Promise<APIResponseType>,
+                                   actionCreator: (userId: number) => ActionTypes) => {
 
     dispatch(actions.toggleFollowingInProgress(true, userId));
     let data = await apiMethod(userId)
@@ -103,9 +106,7 @@ export const unfollow = (userId: number): ThunkType => {
 
 export default usersReducer;
 
-
-type DispatchType = Dispatch<ActionTypes>
-type ThunkType = BaseThunkType<ActionTypes>
-type ActionTypes = InferActionsTypes<typeof actions>
 export type InitialStateType = typeof initialState
 export type FilterType = typeof initialState.filter
+type ThunkType = BaseThunkType<ActionTypes>
+type ActionTypes = InferActionsTypes<typeof actions>

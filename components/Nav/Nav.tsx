@@ -10,7 +10,7 @@ const Nav: React.FC = () => {
                     <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
                 </div>
                 <div className={s.item}>
-                    <NavLink to="/users" activeClassName={s.active}>Users</NavLink>
+                    <NavLink to="/developers" activeClassName={s.active}>Developers</NavLink>
                 </div>
                 <div className={s.item}>
                     <NavLink to="/dialogs" activeClassName={s.active}>Dialogs</NavLink>
